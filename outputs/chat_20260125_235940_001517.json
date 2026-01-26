@@ -1,0 +1,8 @@
+{
+  "report_id": "20260125_235940",
+  "question": "What are the key fintech trends mentioned?",
+  "answer": "Not found in report. The provided context does not mention specific fintech trends, but it does highlight opportunities such as \"Growth in compliance-tech solutions\" and \"Digital governance tools\". However, these are more related to regulatory compliance rather than specific fintech trends.",
+  "chunks_used": [
+    "{\"summary\": \"Executive overview of recent market developments.\", \"drivers\": [\"Regulatory tightening\", \"Increased compliance requirements\"], \"competitors\": [\"Bajaj Finance\", \"HDFC Ltd\", \"Shriram Finance\", \"Muthoot Finance\", \"Manappuram Finance\"], \"impact_radar\": [{\"event\": \"RBI releases new NBFC compliance guidelines\", \"impact_level\": \"High\", \"score\": 85, \"why\": [\"Direct increase in compliance cost\", \"Mandatory operational changes\"], \"actions\": [\"Conduct internal audit\", \"Update compliance workflows\"], \"url\": \"https://rbi.org.in\"}], \"opportunities\": [\"Consolidation of smaller NBFCs\", \"Growth in compliance-tech solutions\", \"Stronger customer trust\", \"Improved risk profiling\", \"Digital governance tools\"], \"risks\": [\"Higher operational costs\", \"Delayed product launches\", \"Regulatory penalties\", \"Liquidity stress\", \"Reduced short-term growth\"], \"90_day_plan\": {\"0_30\": [\"Review regulatory changes\", \"Assign compliance owners\"], \"30_60\": [\"Update internal processes\", \"Train staff on new norms\"], \"60_90\": [\"Automate compliance checks\", \"Engage external auditors\"]}, \"sources\": [\"https://rbi.org.in\", \"https://sebi.gov.in\"]}"
+  ]
+}

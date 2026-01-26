@@ -1,0 +1,11 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Ollama / OS
+.DS_Store
+
+# Vector DB (explain in README, but keep out of git)
+vector_db/
+vector_store/
