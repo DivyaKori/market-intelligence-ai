@@ -1,0 +1,117 @@
+{
+  "summary": "EdTech market analysis from 2023-01-01 to 2024-01-01 with focus on online learning platforms, regulation, and funding trends in India",
+  "drivers": [
+    {
+      "driver": "Increasing demand for digital education due to COVID-19 pandemic",
+      "impact": "Significant growth of EdTech market"
+    },
+    {
+      "driver": "Government initiatives to promote digital learning",
+      "impact": "Increased adoption of online learning platforms"
+    }
+  ],
+  "competitors": [
+    {
+      "company": "Byju's",
+      "strengths": [
+        "Strong brand presence",
+        "Wide range of courses"
+      ],
+      "weaknesses": [
+        "High competition in the market",
+        "Dependence on external funding"
+      ]
+    },
+    {
+      "company": "Unacademy",
+      "strengths": [
+        "Large user base",
+        "Diverse course offerings"
+      ],
+      "weaknesses": [
+        "Limited brand recognition",
+        "High operating costs"
+      ]
+    }
+  ],
+  "impact_radar": [
+    {
+      "theme": "Online learning platforms",
+      "impact": "Significant growth"
+    },
+    {
+      "theme": "Regulation and policy changes",
+      "impact": "Positive for the market"
+    },
+    {
+      "theme": "Funding trends",
+      "impact": "Increased investment in EdTech companies"
+    }
+  ],
+  "opportunities": [
+    {
+      "opportunity": "Development of AI-powered learning tools",
+      "impact": "Improved student engagement and outcomes"
+    },
+    {
+      "opportunity": "Expansion into rural areas",
+      "impact": "Increased accessibility and inclusivity"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Competition from traditional educational institutions",
+      "impact": "Potential decline in demand for online learning platforms"
+    },
+    {
+      "risk": "Regulatory changes that hinder the growth of EdTech companies",
+      "impact": "Delayed or halted investment in the market"
+    }
+  ],
+  "90_day_plan": {
+    "0_30": [
+      {
+        "task": "Conduct market research to identify key trends and competitors",
+        "responsibility": "Market Intelligence Team"
+      },
+      {
+        "task": "Develop a list of potential EdTech companies for analysis",
+        "responsibility": "Research Analysts"
+      }
+    ],
+    "30_60": [
+      {
+        "task": "Analyze financial performance and market share of top EdTech companies",
+        "responsibility": "Financial Analysts"
+      },
+      {
+        "task": "Identify regulatory trends and their impact on the EdTech market",
+        "responsibility": "Regulatory Experts"
+      }
+    ],
+    "60_90": [
+      {
+        "task": "Develop a comprehensive report summarizing key findings and recommendations",
+        "responsibility": "Principal Market Intelligence Strategist"
+      },
+      {
+        "task": "Present the report to stakeholders and provide insights on market opportunities and risks",
+        "responsibility": "Market Intelligence Team"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "source": "EdTech industry reports",
+      "weight": 0.3
+    },
+    {
+      "source": "Government statistics and policy documents",
+      "weight": 0.2
+    },
+    {
+      "source": "Financial data from top EdTech companies",
+      "weight": 0.5
+    }
+  ]
+}

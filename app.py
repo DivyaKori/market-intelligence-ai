@@ -26,8 +26,8 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs(VECTOR_DIR, exist_ok=True)
 
 # ---------------- VECTOR DB (FIXED STEP 2) ----------------
-# ❌ NO LangChain embeddings here
-# ✅ Pure ChromaDB native client
+#  NO LangChain embeddings here
+#  Pure ChromaDB native client
 
 chroma_client = chromadb.Client(
     Settings(

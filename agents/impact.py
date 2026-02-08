@@ -1,24 +1,49 @@
-def impact_agent(extracted_data: dict):
+from langchain_ollama import ChatOllama
+from utils.logger import logger
+import json
+
+llm = ChatOllama(model="llama3")
+
+def impact_agent(extracted_data: dict) -> dict:
     """
-    Analyzes extracted entities and explains business impact
+    Impact Agent
+    - Analyzes themes & competitors
     """
 
-    insights = []
+    logger.info("[Impact] Analysis started")
 
-    themes = extracted_data.get("entities", {}).get("themes", [])
+    prompt = f"""
+You are a senior market analyst.
 
-    if not themes:
-        insights.append(
-            "Regulatory tightening suggests increased compliance costs for NBFCs, "
-            "favoring well-capitalized players over smaller firms."
-        )
+Analyze the following extracted data.
+Return STRICT JSON with:
+- drivers
+- risks
+- opportunities
+- impacts
 
-    insights.append(
-        "Digital lending regulations indicate stronger consumer protection, "
-        "which may slow aggressive growth but improve long-term trust."
-    )
+DATA:
+{json.dumps(extracted_data, indent=2)}
+
+Return ONLY JSON.
+"""
+
+    response = llm.invoke(prompt)
+
+    try:
+        analysis = json.loads(response.content)
+        logger.info("[Impact] LLM analysis completed successfully")
+    except Exception:
+        logger.error("[Impact] Failed to parse analysis JSON")
+        analysis = {
+            "drivers": [],
+            "risks": [],
+            "opportunities": [],
+            "impacts": []
+        }
 
     return {
-        "impact_summary": insights,
-        "input_data": extracted_data
+        "topic": extracted_data.get("topic"),
+        "analysis": analysis,
+        "source_data": extracted_data
     }

@@ -1,5 +1,5 @@
-from langgraph.graph import StateGraph
-from typing import TypedDict
+from typing import TypedDict, Dict, Any
+from langgraph.graph import StateGraph, END
 
 from agents.collector import collector_agent
 from agents.extractor import extractor_agent
@@ -7,37 +7,46 @@ from agents.impact import impact_agent
 from agents.writer import writer_agent
 
 
-# 1️⃣ Define shared state (data flowing between agents)
-class MarketState(TypedDict):
+# =====================================================
+# 1️⃣ Shared State Definition
+# =====================================================
+
+class MarketState(TypedDict, total=False):
     topic: str
-    collected: dict
-    extracted: dict
-    impact: dict
-    final: dict
+    collected: Dict[str, Any]
+    extracted: Dict[str, Any]
+    impact: Dict[str, Any]
+    final: Dict[str, Any]
 
 
-# 2️⃣ Wrap each agent so LangGraph understands it
-def collector_node(state: MarketState):
+# ======================================================
+# 2️⃣ LangGraph Nodes (each wraps ONE agent)
+# =========================================================
+
+def collector_node(state: MarketState) -> MarketState:
     collected = collector_agent(state["topic"])
     return {"collected": collected}
 
 
-def extractor_node(state: MarketState):
+def extractor_node(state: MarketState) -> MarketState:
     extracted = extractor_agent(state["collected"])
     return {"extracted": extracted}
 
 
-def impact_node(state: MarketState):
+def impact_node(state: MarketState) -> MarketState:
     impact = impact_agent(state["extracted"])
     return {"impact": impact}
 
 
-def writer_node(state: MarketState):
-    final = writer_agent(state["impact"])
-    return {"final": final}
+def writer_node(state: MarketState) -> MarketState:
+    final_report = writer_agent(state["impact"])
+    return {"final": final_report}
 
 
-# 3️⃣ Build the graph
+# =========================================================
+# 3️⃣ Build the LangGraph
+# =========================================================
+
 graph = StateGraph(MarketState)
 
 graph.add_node("collector", collector_node)
@@ -45,32 +54,36 @@ graph.add_node("extractor", extractor_node)
 graph.add_node("impact", impact_node)
 graph.add_node("writer", writer_node)
 
-# 4️⃣ Define execution order
 graph.set_entry_point("collector")
+
 graph.add_edge("collector", "extractor")
 graph.add_edge("extractor", "impact")
 graph.add_edge("impact", "writer")
+graph.add_edge("writer", END)
 
-# 5️⃣ Compile graph
 market_graph = graph.compile()
 
-# orchestration/graph.py
 
-def run_graph(topic: str):
+# =========================================================
+# 4️⃣ Public Runner (USED BY FastAPI / app.py)
+# =========================================================
+
+def run_graph(topic: str) -> Dict[str, Any]:
     """
-    Orchestrates all agents in sequence
+    Executes the full Agentic Market Intelligence pipeline
+    using LangGraph orchestration.
     """
 
-    # 1️⃣ Collector Agent
-    collected_data = collector_agent(topic)
+    initial_state: MarketState = {"topic": topic}
 
-    # 2️⃣ Extractor Agent
-    extracted_data = extractor_agent(collected_data)
-
-    # 3️⃣ Impact Agent
-    impact_result = impact_agent(extracted_data)
+    result = market_graph.invoke(initial_state)
 
     return {
         "topic": topic,
-        "analysis": impact_result
+        "report": result.get("final"),
+        "debug": {
+            "collected": result.get("collected"),
+            "extracted": result.get("extracted"),
+            "impact": result.get("impact"),
+        }
     }

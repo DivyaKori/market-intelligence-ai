@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+langchain
+langgraph
+langchain-ollama
+chromadb
+    python-dateutil
+requests
+mcp

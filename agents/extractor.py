@@ -1,19 +1,37 @@
 from mcp_server import tools
+from utils.logger import logger
 
-def extractor_agent(collected_data: dict):
+def extractor_agent(collected_data: dict) -> dict:
     """
-    Takes collector output and extracts structured entities
+    Extractor Agent
+    - Extracts entities & themes
     """
 
-    raw_data = tools.fetch_url("dummy_url")
+    logger.info("[Extractor] Started")
 
-    # 🔑 THIS LINE IS CRITICAL
-    raw_text = str(raw_data)
+    documents = collected_data.get("documents", [])
 
-    clean_text = tools.clean_extract(raw_text)
-    entities = tools.extract_entities(clean_text)
+    themes = []
+    competitors = []
+    extracted_docs = []
+
+    for doc in documents:
+        text = doc.get("content", "")
+        entities = tools.extract_entities(text)
+
+        extracted_docs.append({
+            "url": doc.get("url"),
+            "entities": entities
+        })
+
+        themes.extend(entities.get("themes", []))
+        competitors.extend(entities.get("competitors", []))
+
+    logger.info("[Extractor] Entity extraction completed")
 
     return {
-        "entities": entities,
-        "source_data": collected_data
+        "topic": collected_data.get("topic"),
+        "themes": tools.dedupe_items(themes),
+        "competitors": tools.dedupe_items(competitors),
+        "documents": extracted_docs
     }
